@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1><a href="/catalog">Каталог</a></h1>
+    </div>
+
+    <div class="sort-block">
+
+        <form action="select1.php" method="GET">
+            <a> Сортировать по </a>
+            <p><select name="sort">
+                <option><a href="{% url 'catalog' %}?sort=name"> По имени </a></option>
+                    {% for phone in phone_data|dictsort:'name' %}
+                        {{ phone.name }}
+                    {% endfor %}
+                <option><a href="{% url 'catalog' %}?sort=min_price"> Сначала дешевые </a></option>
+                <option><a href="{% url 'catalog' %}?sort=max_price"> Сначала дорогие </a></option>
+            </select></p>
+        </form>
+    </div>
+    <style type="text/css">
+        .thumbnails
+        {
+        margin: -7em 0 0 -20em;
+        text-align: center;
+        }
+        .thumbnail
+        {
+        text-decoration: none;
+        display: -moz-inline-box;
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        margin: 7em 0 0 20em;
+        }
+        .thumbnail .r
+        {
+        width: 14em;
+        float: left;
+        }
+
+    </style>
+    <div class="thumbnails">
+        <ins class="thumbnail">
+            <div class="r">
+                {% for phone in phone_data %}
+                &laquo;<a href="{{ phone.name }}">{{ phone.name }}</a>&raquo;
+                <p>Стоимость {{ phone.price }}</p>
+                <a><img src="{{ phone.image }}" alt="Фотография 1" width="240" height="480"/></a><br/>
+                {% endfor %}
+            </div>
+        </ins>
+    </div>
+    {% endblock %}
+</div>
