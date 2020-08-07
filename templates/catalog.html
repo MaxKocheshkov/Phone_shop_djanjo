@@ -9,17 +9,18 @@
     </div>
 
     <div class="sort-block">
-
-        <form action="select1.php" method="GET">
+        <form method="get">
             <a> Сортировать по </a>
-            <p><select name="sort">
-                <option><a href="{% url 'catalog' %}?sort=name"> По имени </a></option>
-                    {% for phone in phone_data|dictsort:'name' %}
-                        {{ phone.name }}
-                    {% endfor %}
-                <option><a href="{% url 'catalog' %}?sort=min_price"> Сначала дешевые </a></option>
-                <option><a href="{% url 'catalog' %}?sort=max_price"> Сначала дорогие </a></option>
-            </select></p>
+            <select id="catalog">
+                <option value="?sort=name">По имени</option>
+                <option value="?sort=min_price">Сначала дешевые</option>
+                <option value="?sort=max_price">Сначала дорогие</option>
+            </select>
+<!--            <p><select name="sort">-->
+<!--                <option><a href="{% url 'catalog' %}?sort="name">По имени</a></option>-->
+<!--                <option><a href="{% url 'catalog' %}?sort=min_price"> Сначала дешевые </a></option>-->
+<!--                <option><a href="{% url 'catalog' %}?sort=max_price"> Сначала дорогие </a></option>-->
+<!--            </select></p>-->
         </form>
     </div>
     <style type="text/css">
