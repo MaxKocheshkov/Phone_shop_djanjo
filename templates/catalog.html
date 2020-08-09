@@ -42,7 +42,7 @@
         <ins class="thumbnail">
             <div class="r">
                 {% for phone in phone_data %}
-                    &laquo;<a href={{slug}}>{{ phone.name }}</a>&raquo;
+                    &laquo;<a href="{{ phone.name }}">{{ phone.name }}</a>&raquo;
                     <p>Стоимость {{ phone.price }}</p>
                     <a><img src="{{ phone.image }}" alt="Фотография " width="240" height="480"/></a>
                 {% endfor %}

@@ -1,6 +1,8 @@
 import csv
 
 from django.core.management.base import BaseCommand
+from django.utils.text import slugify
+
 from phones.models import Phone
 
 
@@ -22,5 +24,6 @@ class Command(BaseCommand):
                 phone_data.price = line[3]
                 phone_data.release_date = line[4]
                 phone_data.lte_exists = line[5]
+                phone_data.slug = slugify(line[1])
                 phone_data.save()
         return phone_data
