@@ -9,17 +9,15 @@
         </div>
         <div class="content">
             <div class="r">
-                {% for phone in phone_data %}
-                    &laquo;<a>{{ phone.name }}</a>&raquo;
-                    <p>Стоимость {{ phone.price }}</p>
-                    <p>Дата выпуска {{ phone.release_date }}</p>
-                    {% if phone.lte_exist = 1 %}
+                    &laquo;<a>{{ product_data.name }}</a>&raquo;
+                    <p>Стоимость {{ product_data.price }}</p>
+                    <p>Дата выпуска {{ product_data.release_date }}</p>
+                    {% if product_data.lte_exists == 1 %}
                         <p>Вналичии</p>
                     {% else %}
                         <p>Нет вналичии</p>
                     {% endif %}
-                    <a><img src="{{ phone.image }}" alt="Фотография" width="240" height="480"/></a>
-                {% endfor %}
+                    <a><img src="{{ product_data.image }}" alt="Фотография" width="240" height="480"/></a>
             </div>
         </div>
     </div>

@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
 
 from .models import Phone
 
@@ -21,8 +20,7 @@ def show_catalog(request):
 
 
 def show_product(request, slug):
-    pass
-    # template = 'product.html'
-    # # slug = reverse(Phone.objects.values("slug"))
-    # context = {'phone_data': Phone.objects.all()}
-    # return render(request, template, context=context)
+    template = 'product.html'
+    product_data = get_object_or_404(Phone, slug=slug)
+    context = {'product_data': product_data}
+    return render(request, template, context=context)
