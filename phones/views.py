@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from slugify import slugify
 from .models import Phone
 
 phone_data = Phone.objects.all()
@@ -7,18 +7,23 @@ phone_data = Phone.objects.all()
 
 def show_catalog(request):
     template = 'catalog.html'
-    if request.GET.get('sort', 'name'):
-        phone_data.order_by("name")
-    elif request.GET.get('sort', 'min_price'):
-        phone_data.order_by("-price")
-    elif request.GET.get('sort', 'max_price'):
-        phone_data.order_by("price")
-    context = {'phone_data': phone_data}
-    return render(request, template, context)
+    if 'name' in request.GET.get('sort'):
+        n_context = {'phone_data': Phone.objects.all().order_by("name")}
+        return render(request, template, context=n_context)
+    elif 'min_price' in request.GET.get('sort'):
+        min_context = {'phone_data': Phone.objects.all().order_by("price")}
+        return render(request, template, context=min_context)
+    elif 'max_price' in request.GET.get('sort'):
+        max_context = {'phone_data': Phone.objects.all().order_by("-price")}
+        return render(request, template, context=max_context)
+    else:
+        context = {'phone_data': phone_data}
+        return render(request, template, context=context)
 
 
 def show_product(request, slug):
     template = 'product.html'
-    slug = Phone.slug(phone_data.get('name'))
-    context = {}
-    return render(request, template, context)
+    for name in Phone.objects.values_list("name", flat=True):
+        slug = slugify(name)
+        context = {'slug': slug, 'phone_data': phone_data}
+        return render(request, template, context=context)

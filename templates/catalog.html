@@ -10,17 +10,10 @@
 
     <div class="sort-block">
         <form method="get">
-            <a> Сортировать по </a>
-            <select id="catalog">
-                <option value="?sort=name">По имени</option>
-                <option value="?sort=min_price">Сначала дешевые</option>
-                <option value="?sort=max_price">Сначала дорогие</option>
-            </select>
-<!--            <p><select name="sort">-->
-<!--                <option><a href="{% url 'catalog' %}?sort="name">По имени</a></option>-->
-<!--                <option><a href="{% url 'catalog' %}?sort=min_price"> Сначала дешевые </a></option>-->
-<!--                <option><a href="{% url 'catalog' %}?sort=max_price"> Сначала дорогие </a></option>-->
-<!--            </select></p>-->
+            <a> Сортировать по: </a>
+                <option><a href="{% url 'catalog' %}?sort=name"> По имени</a></option>
+                <option><a href="{% url 'catalog' %}?sort=min_price"> Сначала дешевые </a></option>
+                <option><a href="{% url 'catalog' %}?sort=max_price"> Сначала дорогие </a></option>
         </form>
     </div>
     <style type="text/css">
@@ -49,9 +42,9 @@
         <ins class="thumbnail">
             <div class="r">
                 {% for phone in phone_data %}
-                &laquo;<a href="{{ phone.name }}">{{ phone.name }}</a>&raquo;
-                <p>Стоимость {{ phone.price }}</p>
-                <a><img src="{{ phone.image }}" alt="Фотография 1" width="240" height="480"/></a><br/>
+                    &laquo;<a href={{slug}}>{{ phone.name }}</a>&raquo;
+                    <p>Стоимость {{ phone.price }}</p>
+                    <a><img src="{{ phone.image }}" alt="Фотография " width="240" height="480"/></a>
                 {% endfor %}
             </div>
         </ins>

@@ -9,7 +9,17 @@
         </div>
         <div class="content">
             <div class="r">
-                <a> Phone </a>
+                {% for phone in phone_data %}
+                    &laquo;<a href={{slug.slug}}>{{ phone.name }}</a>&raquo;
+                    <p>Стоимость {{ phone.price }}</p>
+                    <p>Дата выпуска {{ phone.release_date }}</p>
+                    {% if phone.lte_exist = 1 %}
+                        <p>Вналичии</p>
+                    {% else %}
+                        <p>Нет вналичии</p>
+                    {% endif %}
+                    <a><img src="{{ phone.image }}" alt="Фотография " width="240" height="480"/></a>
+                {% endfor %}
             </div>
         </div>
     </div>
