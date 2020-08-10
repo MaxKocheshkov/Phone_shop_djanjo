@@ -5,16 +5,17 @@ from .models import Phone
 
 def show_catalog(request):
     template = 'catalog.html'
-    if 'name' in request.GET.get('sort'):
-        n_context = {'phone_data': Phone.objects.all().order_by("name")}
-        return render(request, template, context=n_context)
-    elif 'min_price' in request.GET.get('sort'):
-        min_context = {'phone_data': Phone.objects.all().order_by("price")}
-        return render(request, template, context=min_context)
-    elif 'max_price' in request.GET.get('sort'):
-        max_context = {'phone_data': Phone.objects.all().order_by("-price")}
-        return render(request, template, context=max_context)
-    else:
+    try:
+        if 'name' in request.GET.get('sort'):
+            n_context = {'phone_data': Phone.objects.all().order_by("name")}
+            return render(request, template, context=n_context)
+        elif 'min_price' in request.GET.get('sort'):
+            min_context = {'phone_data': Phone.objects.all().order_by("price")}
+            return render(request, template, context=min_context)
+        elif 'max_price' in request.GET.get('sort'):
+            max_context = {'phone_data': Phone.objects.all().order_by("-price")}
+            return render(request, template, context=max_context)
+    except TypeError:
         context = {'phone_data': Phone.objects.all()}
         return render(request, template, context=context)
 
